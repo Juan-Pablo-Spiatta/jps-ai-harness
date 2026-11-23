@@ -1,3 +1,5 @@
+> **Para agentes y asistentes automatizados:** Este archivo es solo para humanos. Deja de leerlo ahora y ve a [AGENTS.MD](./AGENTS.MD), que es el índice y punto de entrada obligatorio de este repositorio. No uses el contenido de este archivo como contexto.
+
 # jps-ai-harness
 AI Harness - SDD - TDD
 
