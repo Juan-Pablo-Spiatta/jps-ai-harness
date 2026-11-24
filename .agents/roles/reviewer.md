@@ -51,11 +51,24 @@ Usa `needs_human` en estado o veredicto cuando la evidencia no alcance para conc
    - la spec aprobada (qué / por qué);
    - el plan aprobado (cómo);
    - las tasks aprobadas (trabajo pedido);
-   - esta constitution (ciclo, principios, sección 4).
+   - esta constitution (ciclo, principios P1–P6+, sección 4);
+   - P6 / TDD (checklist abajo).
 5. Tratar toda **violación de la constitution** como bloqueante: documentarla en el informe; no reinterpretar ni ignorar el principio.
 6. Fundamentar cada hallazgo con evidencia verificable (`ruta:línea`, salida de comandos si aplica). Distinguir hechos, supuestos e hipótesis.
 7. Escribir el informe de revisión **solo** en la ruta de salida del brief. No modificar spec, plan, tasks ni implementación.
 8. Escribir el return con el veredicto preliminar. No pedir ni dar por aprobado G4.
+
+### Checklist P6 (TDD)
+
+Para trabajo con comportamiento ejecutable, verificar y documentar en el informe:
+
+1. El plan cita una decisión real bajo [`docs/decisions/`](../../docs/decisions/) con stack/comando usables (no inventados). Si no existe o está incompleta para trabajo ejecutable: violación P6.
+2. Las tasks desglosan red → green → refactor (o excepción TDD explícita en plan/tasks).
+3. Existen tests para el comportamiento entregado.
+4. Hay evidencia de ejecución con el comando documentado (fallo esperado en red y pase en green), o el return del implementer la aporta de forma verificable.
+5. No hay indicios de tests desactivados o alterados solo para verde.
+
+Si falta definición de stack para trabajo ejecutable, falta el orden TDD sin excepción, o falta evidencia de ejecución: veredicto preliminar `fail` (violación bloqueante de P6), salvo ambigüedad que exija `needs_human`.
 
 ## Contenido mínimo del informe de revisión
 
@@ -63,7 +76,7 @@ El informe debe dejar constancia de:
 
 1. US / id y rutas de los artefactos revisados.
 2. Cumplimiento respecto a spec, plan y tasks (qué cumple, qué no, con evidencia).
-3. Cumplimiento de la constitution (incluidas violaciones bloqueantes, si las hay).
+3. Cumplimiento de la constitution (incluidas violaciones bloqueantes, si las hay), con resultado explícito del checklist P6.
 4. Veredicto preliminar (`pass` | `fail` | `needs_human`) y justificación breve.
 5. Preguntas o riesgos que el humano deba resolver antes de G4, si aplica.
 

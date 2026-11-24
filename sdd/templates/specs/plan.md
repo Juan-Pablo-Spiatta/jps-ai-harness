@@ -32,12 +32,15 @@
 | Lenguaje / runtime | |
 | Dependencias relevantes | |
 | Persistencia | |
-| Pruebas | |
+| Pruebas (ruta) | Archivo bajo `docs/decisions/` que documente el stack (ruta real; no inventar el nombre) |
+| Pruebas (stack / comando citados) | Citar literalmente desde esa decisión. Si no existe o está incompleta y hay comportamiento ejecutable: `NEEDS CLARIFICATION` |
+| Excepción TDD (si aplica) | `N/A` o listar qué queda fuera (docs, renames, config sin lógica) |
 | Plataforma / entorno | |
 | Restricciones | |
 | Escala / alcance técnico | |
 
 > Si un campo no aplica: `N/A`. Si falta información crítica: `NEEDS CLARIFICATION` y reportarlo en preguntas.
+> No inventar runner ni comando: solo lo documentado en la decisión de pruebas bajo `docs/decisions/` (P6). Si no hay ninguna, exigirla al humano.
 
 ## Contraste con la constitution
 
@@ -50,8 +53,9 @@
 | P3 — Un responsable por artefacto | sí \| no \| N/A | |
 | P4 — Lo aprobado solo se cambia reabriendo | sí \| no \| N/A | |
 | P5 — Las dudas se preguntan | sí \| no \| N/A | |
+| P6 — TDD + stack documentado bajo `docs/decisions/` | sí \| no \| N/A | Cita ruta real + stack/comando, o justifica excepción / `needs_human` |
 | Ciclo Spec → … → G4 | sí \| no \| N/A | |
-| Otros (P6+ del producto, si existen) | sí \| no \| N/A | |
+| Otros (P7+ del producto, si existen) | sí \| no \| N/A | |
 
 **Resultado del contraste:** `pass` \| `fail` \| `needs_human`
 
@@ -93,4 +97,6 @@
 
 - No contradecir ni reescribir la spec aprobada; si hace falta cambiarla, reportar P4.
 - No redactar las tasks aquí.
+- No inventar stack, runner o comando de pruebas: citar la decisión real bajo `docs/decisions/` o `needs_human` (P6).
+- No marcar `ready_for_g2` con comportamiento ejecutable si falta o está incompleta la decisión de pruebas bajo `docs/decisions/`.
 - No marcar `approved_g2` ni asumir G2: eso lo registra el leader tras el «aprobado» explícito del humano.

@@ -1,6 +1,6 @@
 # Convenciones
 
-Acuerdos de **forma** del repositorio: cómo se nombran cosas, cómo se escriben commits, y reglas similares que no son metodología SDD ni principios de la constitution.
+Acuerdos de **forma** del repositorio (harness): cómo se nombran cosas, cómo se escriben commits, y reglas similares que no son metodología SDD, principios de la constitution ni decisiones de producto.
 
 ## Cómo usar este directorio
 

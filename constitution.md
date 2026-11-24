@@ -21,13 +21,17 @@ Cada principio es una regla no negociable, con su justificación.
 **P5. Las dudas se preguntan, no se suponen.** Toda duda o riesgo se comunica al humano y se resuelve con él antes de avanzar.
 *Por qué:* una suposición no verificada se convierte en un requisito inventado.
 
+**P6. TDD obligatorio para comportamiento ejecutable.** Todo comportamiento ejecutable se introduce con Test-Driven Development: primero un test que falla (red), luego el código mínimo que lo hace pasar (green), luego refactor sin cambiar el comportamiento observable. No se escribe código de producción de ese comportamiento antes del test rojo. No se modifican, desactivan ni eliminan tests solo para ponerlos en verde. El stack de pruebas y cómo usarlos deben estar documentados en un archivo bajo [`docs/decisions/`](./docs/decisions/); los agentes solo usan esa definición. El nombre del archivo lo define el producto. Si no existe o está incompleto, el agente lo exige al humano y no avanza (P5): no inventa un runner ni un comando en el plan.
+*Por qué:* el test rojo fija el comportamiento esperado antes de la implementación; sin stack documentado, el ciclo TDD no es verificable ni repetible.
+
 <!--
 RESERVADO: principios propios del producto.
-Completar al llevar el harness a un producto real. Siguen el mismo formato que P1-P5 (numerar a partir de P6):
-regla verificable + justificación. Ejemplos de temas que pueden ir aquí: calidad, pruebas, seguridad,
-arquitectura, rendimiento, accesibilidad.
+Completar al llevar el harness a un producto real. Siguen el mismo formato que P1-P6 (numerar a partir de P7):
+regla verificable + justificación. Ejemplos de temas que pueden ir aquí: calidad, seguridad,
+rendimiento, accesibilidad. El stack concreto de pruebas y la arquitectura del producto no van aquí:
+se documentan en docs/decisions/.
 
-**P6. [Nombre del principio].** [Regla no negociable y verificable.]
+**P7. [Nombre del principio].** [Regla no negociable y verificable.]
 *Por qué:* [justificación].
 -->
 
@@ -62,6 +66,24 @@ Spec → G1 → Plan → G2 → Tasks → G3 → Implement → Review → G4
 - Una US genera una spec por cada proyecto o paquete al que afecta. En un repositorio simple, una US genera una sola spec.
 - La spec define solo el qué y el por qué. No incluye decisiones técnicas: el cómo se define en el Plan.
 - Antes de redactar, el responsable de la spec hace las preguntas aclaratorias que necesite (P5). Una spec con preguntas o riesgos sin resolver no pasa a G1.
+
+**Fase Plan.** Además de lo establecido en los principios, la fase Plan tiene estas reglas relacionadas con P6:
+
+- El plan busca en [`docs/decisions/`](./docs/decisions/) la decisión que documenta el stack de pruebas y cómo usarlos, y la cita (ruta + stack + comando(s) + ubicación de tests). No inventa un runner ni un comando que no esté en esa decisión.
+- Si no hay ninguna decisión usable de pruebas bajo `docs/decisions/`, o está incompleta, y el trabajo incluye comportamiento ejecutable, el plan no está listo para G2: el agente lo exige al humano (P5) o se completa la decisión antes.
+- Los cambios sin comportamiento ejecutable (documentación, renames, configuración sin lógica) pueden declarar excepción a TDD en el plan; el resto del trabajo sigue P6.
+
+**Fase Tasks.** Además de lo establecido en los principios, la fase Tasks tiene estas reglas relacionadas con P6:
+
+- Cada comportamiento ejecutable se parte en tasks ordenadas: test que falla → código mínimo que lo hace pasar → refactor si aplica (con dependencias explícitas).
+- La verificación usa el comando documentado en la decisión de pruebas bajo `docs/decisions/` citada por el plan. La excepción a TDD, si existe, debe quedar escrita en las tasks.
+
+**Fase Implement.** Además de lo establecido en los principios, la fase Implement tiene estas reglas (P6):
+
+- Por cada unidad de comportamiento ejecutable: ejecutar o escribir el test hasta verlo fallar (red), implementar el mínimo para pasarlo (green), refactorizar sin cambiar el comportamiento observable.
+- La evidencia en el return incluye el comando usado (el de la decisión de pruebas citada en el plan) y el resultado real: fallo esperado en red, pase en green.
+- No implementar green de una unidad antes de haber evidenciado el red de esa misma unidad.
+- Si el stack o el comando no están definidos en una decisión bajo `docs/decisions/`, detenerse y exigirlo al humano (P5); no inventarlos.
 
 ## 3. Roles y responsabilidades
 
@@ -131,6 +153,8 @@ Fuentes consultadas el 2026-11-23. Inspiran esta constitution, pero no la sustit
 | [GitHub Spec Kit: plan-template.md](https://raw.githubusercontent.com/github/spec-kit/main/templates/plan-template.md) y [commands/analyze.md](https://raw.githubusercontent.com/github/spec-kit/main/templates/commands/analyze.md) | Contraste del plan contra la constitution antes de avanzar; una violación es bloqueante y no se reinterpreta. | Sección 4 |
 | [Claude Code: best practices](https://code.claude.com/docs/en/best-practices) | Mantener los archivos de contexto cortos y solo con lo que el agente no puede deducir. | Estilo general |
 
-Decisiones propias de este repositorio, sin fuente externa: los cuatro gates humanos G1-G4, el ciclo con sus fases, los subagentes (con sus fases o su rol transversal), y el reparto de precedencia con `AGENTS.MD`.
+Decisiones propias de este repositorio, sin fuente externa: los cuatro gates humanos G1-G4, el ciclo con sus fases, los subagentes (con sus fases o su rol transversal), el reparto de precedencia con `AGENTS.MD`, y P6 (TDD estricto con stack documentado bajo `docs/decisions/`, sin fijar nombre de archivo ni runner en el harness).
 
-**Version**: 1.0.0 | **Ratified**: TODO(RATIFICATION_DATE): confirmar la fecha de adopción | **Last Amended**: 2026-11-23
+**Enmienda 1.1.0 (2026-11-23):** se agrega P6 (TDD + obligación de stack/uso en un archivo bajo `docs/decisions/`; si falta, el agente lo exige al humano), reglas de Plan/Tasks/Implement ligadas a P6, y el bloque RESERVADO de producto pasa a numerar desde P7. Impacto: planes y tasks futuros deben citar la decisión de pruebas existente y desglosar comportamiento ejecutable en orden red→green→refactor; artefactos ya aprobados bajo 1.0.0 deben reabrirse si dejan de cumplir P6 (sección 6, P4).
+
+**Version**: 1.1.0 | **Ratified**: TODO(RATIFICATION_DATE): confirmar la fecha de adopción | **Last Amended**: 2026-11-23

@@ -24,6 +24,7 @@
 - Señalar las inconsistencias que detectes entre fuentes, o entre tus respuestas anteriores y la evidencia actual, y corregirlas.
 - Recomendar validación humana para información crítica o decisiones de alto impacto.
 - Al documentar o explicar el repositorio, describir solo el estado vigente: lo que existe y rige ahora.
+- Al documentar el producto (arquitectura, stacks, testing u otras decisiones técnicas equivalentes), escribir solo bajo [`docs/decisions/`](./docs/decisions/); no inventar otra carpeta.
 
 ### Lo que NUNCA debes hacer
 
@@ -58,4 +59,6 @@ Puntos de recolección de información del repositorio. Antes de buscar informac
 | Specs SDD | `sdd/specs/<NNNN-feature-slug>/` (contrato en [`.agents/roles/leader.md`](./.agents/roles/leader.md)) | Artefactos de fase: `spec.md`, `plan.md`, `tasks.md`. Nombre: número de 4 dígitos + slug kebab-case (ej. `0001-user-login`). Existen antes del gate; aprueba solo el humano (G1–G3). |
 | Plantillas de progreso | [`sdd/templates/progress/`](./sdd/templates/progress/) | Plantillas de `current.md`, `history.md` y contexto por subagente. Copiarlas a `sdd/progress/` al iniciar o reiniciar un ciclo. |
 | Plantillas de specs | [`sdd/templates/specs/`](./sdd/templates/specs/) | Plantillas de `spec.md`, `plan.md`, `tasks.md`. `spec_author` las copia a `sdd/specs/<NNNN-feature-slug>/` según la ruta de salida del brief. |
-| Convenciones | [`docs/conventions/`](./docs/conventions/) | Acuerdos de forma (nombres de archivos, commits, etc.). Un tema por archivo; índice en `README.md` de esa carpeta. Consultar antes de crear o renombrar artefactos sujetos a ellas. |
+| Convenciones | [`docs/conventions/`](./docs/conventions/) | Acuerdos de forma del harness (nombres de archivos, commits, etc.). Un tema por archivo; índice en `README.md` de esa carpeta. No confundir con decisiones de producto. |
+| Decisiones de producto | [`docs/decisions/`](./docs/decisions/) | Arquitectura, stacks, testing y decisiones técnicas del producto. Si el humano pide documentar el producto, crear o actualizar archivos **solo** aquí (kebab-case). Índice en `README.md` de esa carpeta. |
+| Stack / pruebas | [`docs/decisions/`](./docs/decisions/) (archivo que documente el stack y cómo usarlo; el nombre lo define el producto) | Fuente de stack, comandos y uso bajo TDD (P6). El plan debe citar la ruta real. Si no existe o está incompleto, el agente lo exige al humano y no avanza comportamiento ejecutable (P5). |

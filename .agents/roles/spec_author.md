@@ -65,12 +65,17 @@ Usa `needs_human` cuando haya dudas o riesgos sin resolver. Usa `blocked` cuando
 **Plan**
 
 - Define el cómo a partir de la spec aprobada. No reescribe ni contradice la spec.
-- Antes de cerrar: contrastar el plan contra los principios (P1 en adelante) y las reglas de la constitution (sección 4), y dejar constancia del resultado en el propio plan o en el return. Una violación es bloqueante: corregir el plan o reportar `needs_human`; no reinterpretar el principio.
+- Buscar bajo [`docs/decisions/`](../../docs/decisions/) la decisión que documente el stack de pruebas y cómo usarlos. Citar en el plan la ruta real, el stack y el comando. No inventar runner, comando ni nombre de archivo (P6).
+- Si no existe o está incompleta, y el trabajo incluye comportamiento ejecutable: exigirlo al humano con return `needs_human` (o dejar el plan en `needs_human`); no marcar listo para G2.
+- Declarar en el plan cualquier excepción a TDD (docs, renames, config sin lógica u otras ya previstas en la decisión de pruebas).
+- Antes de cerrar: contrastar el plan contra los principios (P1 en adelante, incluido P6) y las reglas de la constitution (sección 4), y dejar constancia del resultado en el propio plan o en el return. Una violación es bloqueante: corregir el plan o reportar `needs_human`; no reinterpretar el principio.
 - No avanzar como si G2 estuviera aprobado.
 
 **Tasks**
 
 - Dividir el plan aprobado en tareas concretas y ejecutables. Cada task debe ser accionable por el implementer.
+- Para cada comportamiento ejecutable: tasks ordenadas red → green → refactor (dependencias explícitas), según la plantilla de tasks y P6.
+- Incluir en Identificación la ruta real de la decisión de pruebas bajo `docs/decisions/` y el comando de test citado del plan.
 - No añadir alcance que no esté en el plan aprobado.
 - No avanzar como si G3 estuviera aprobado.
 
