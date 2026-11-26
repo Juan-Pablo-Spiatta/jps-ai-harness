@@ -41,7 +41,7 @@ Tomados de `constitution.md` (sección 3) y de `.agents/roles/`. Usar estos valo
 
 | Rol (archivo) | `name` (agente) | `description` (cuándo usarlo) | Herramientas orientativas |
 | --- | --- | --- | --- |
-| `leader.md` | `leader` | Orquesta el ciclo SDD: decide la fase, escribe briefs, delega en subagentes, controla gates humanos y mantiene `sdd/progress/`. Úsalo al empezar o retomar una US o el ciclo. | Lectura + edición de progreso + capacidad de invocar otros agentes (`agent` en Copilot; heredar herramientas de delegación en el resto). |
+| `leader.md` | `leader` | Orquesta el ciclo SDD: decide la fase, escribe briefs, delega en subagentes, controla gates humanos y mantiene `sdd/progress/`. Úsalo al empezar o retomar una US o el ciclo, y ante cualquier ajuste o corrección pedida mientras el ciclo está en curso (incluida la espera de un gate). | Lectura + edición de progreso + capacidad de invocar otros agentes (`agent` en Copilot; heredar herramientas de delegación en el resto). |
 | `spec_author.md` | `spec-author` | Redacta spec, plan o tasks (una fase por encargo) bajo `sdd/specs/<NNNN-feature-slug>/` a partir del brief. Úsalo en las fases Spec, Plan o Tasks. | Lectura, búsqueda y edición (escribe artefactos y `return.md`). |
 | `implementer.md` | `implementer` | Ejecuta las tasks aprobadas. Úsalo en la fase Implement. | Lectura, búsqueda, edición y ejecución (código + verificación). |
 | `reviewer.md` | `reviewer` | Revisa la implementación contra spec, plan, tasks y constitution; emite el informe. Úsalo en la fase Review. | Lectura, búsqueda y edición (solo el informe / `return.md`). |

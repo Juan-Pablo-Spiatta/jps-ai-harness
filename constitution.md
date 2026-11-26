@@ -60,6 +60,12 @@ Spec → G1 → Plan → G2 → Tasks → G3 → Implement → Review → G4
 - Al terminar la fase previa a un gate, el agente se detiene y pide la aprobación explícita antes de continuar.
 - Si un gate no se aprueba, se vuelve a la fase correspondiente para corregirla y se repite el gate.
 
+**Ajustes pedidos por el humano durante el ciclo:**
+
+- Si el humano pide un ajuste, corrección o cambio mientras el ciclo está en curso (incluida la espera de un gate G1–G4), el agente principal no lo aplica por su cuenta ni salta el proceso: deriva al `leader`.
+- El `leader` decide cómo continuar: qué fase reabrir o repetir (P4), qué gate volver a pedir (P1) y en qué subagente de fase delegar. No improvisa el cambio fuera del ciclo (P2, P3).
+- Ejemplo: si se espera G4 y el humano indica que la implementación no cumple lo esperado, el `leader` determina si basta reabrir Implement y/o Review, o si hay que volver a Spec, Plan o Tasks y repetir sus gates.
+
 **Fase Spec.** Además de lo establecido en los principios, la fase Spec tiene estas reglas:
 
 - Toda spec sale de una Historia de Usuario (US) del backlog del producto. Las US se toman en el orden en que aparecen en el backlog.
@@ -160,4 +166,6 @@ Decisiones propias de este repositorio, sin fuente externa: los cuatro gates hum
 
 **Enmienda 1.2.0 (2026-11-26):** se agrega el subagente transversal `git_flow` (sección 3) para ejecutar el proceso GitFlow (ramas, publicación, MRs) sin alterar el ciclo SDD ni los gates. Impacto: el `leader` (u otro agente) puede delegarle operaciones Git vía brief; hace falta su rol en `.agents/roles/git_flow.md`, plantillas de progreso y adaptador nativo. No reabre artefactos de fase ya aprobados.
 
-**Version**: 1.2.0 | **Ratified**: TODO(RATIFICATION_DATE): confirmar la fecha de adopción | **Last Amended**: 2026-11-26
+**Enmienda 1.3.0 (2026-11-26):** se agrega en la sección 2 la mecánica «Ajustes pedidos por el humano durante el ciclo»: el agente principal deriva al `leader`, que decide qué fase reabrir (P4) y a qué subagente delegar, sin aplicar el cambio fuera del ciclo. Impacto: el rol `leader` documenta el disparador y el procedimiento; no reabre por sí sola artefactos ya aprobados (solo aplica cuando el humano pida un ajuste en un ciclo activo).
+
+**Version**: 1.3.0 | **Ratified**: TODO(RATIFICATION_DATE): confirmar la fecha de adopción | **Last Amended**: 2026-11-26

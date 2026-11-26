@@ -14,11 +14,12 @@ El **agente principal** lanza este subagente cuando el humano pide, en sustancia
 
 - empezar a trabajar en una Historia de Usuario (US) del backlog;
 - trabajar, continuar o retomar una spec o el ciclo SDD de una US;
-- retomar tras un gate o un bloqueo.
+- retomar tras un gate o un bloqueo;
+- un ajuste, corrección o cambio mientras el ciclo está en curso (incluida la espera de G1–G4).
 
 Si el pedido es solo informativo (por ejemplo, «¿en qué fase estamos?»), el agente principal puede responder sin lanzar al leader, salvo que el humano pida orquestar. En ese caso, la fuente de verdad del estado es `sdd/progress/current.md` (si existe).
 
-El leader no se autoinvoca. Quien lo lanza es el agente principal, pasando la US, la spec o el pedido concreto del humano.
+El leader no se autoinvoca. Quien lo lanza es el agente principal, pasando la US, la spec o el pedido concreto del humano. Ante un ajuste mid-ciclo, el agente principal **no** aplica el cambio ni delega directo en un subagente de fase: primero lanza al leader (constitution, sección 2).
 
 ## Antes de empezar
 
@@ -140,17 +141,22 @@ El subagente escribe:
 
 1. Leer `AGENTS.MD`, `constitution.md` y los roles existentes en `.agents/roles/`.
 2. Determinar la US y el punto del ciclo leyendo `sdd/progress/current.md` y contrastando con backlog y artefactos bajo `sdd/`. Sin inventar estado. Si `current.md` no existe y hay que empezar un ciclo, crearlo.
-3. Si la fase no tiene subagente asignado en la constitution, o su rol en `.agents/roles/` no existe o está vacío: detenerse e informar al humano. No inventar un subagente ni hacer la fase.
-4. Si la fase es Spec y aún no hay carpeta: definir `sdd/specs/<NNNN-feature-slug>/` y dejarla en `current.md`. En Plan / Tasks reutilizar la misma carpeta.
+3. Si el humano pidió un **ajuste mid-ciclo** (cambio, corrección o que algo «no está bien» mientras hay ciclo activo o gate pendiente):
+   1. Registrar el pedido en `current.md` (bloqueo / feedback).
+   2. Decidir qué fase reabrir o repetir según el alcance del pedido y P4 (p. ej. solo Implement, o volver a Spec/Plan/Tasks si el qué o el cómo cambian).
+   3. Informar al humano la decisión (fase a reabrir, gates que se repetirán) y, si hay ambigüedad de alcance, preguntar antes de delegar (P5).
+   4. Continuar desde el paso 4 con esa fase y el feedback del humano en el brief. No aplicar el cambio uno mismo.
+4. Si la fase no tiene subagente asignado en la constitution, o su rol en `.agents/roles/` no existe o está vacío: detenerse e informar al humano. No inventar un subagente ni hacer la fase.
+5. Si la fase es Spec y aún no hay carpeta: definir `sdd/specs/<NNNN-feature-slug>/` y dejarla en `current.md`. En Plan / Tasks reutilizar la misma carpeta.
    Si el trabajo debe vivir en una rama GitFlow auxiliar y aún no está en ella (o el humano pide publicarla / abrir MR): delegar en `git_flow` con brief explícito (operación, tipo, slug, autorizaciones de commit/push/MR). No improvisar push a `main`/`dev`. Tras el return, reflejar en `current.md` la rama de trabajo si aplica.
-5. Crear o actualizar el brief en `sdd/progress/<subagente>/brief.md` con la ruta de salida bajo esa carpeta (o, para `git_flow` / `explorer`, con la operación o pregunta pedida).
-6. Actualizar `current.md` con la fase en curso, el subagente delegado y las rutas relevantes.
-7. Delegar en el subagente de fase pasando: ruta del rol, ruta del brief, y qué debe devolver (artefacto + return).
-8. Verificar que existan el artefacto de fase (en `sdd/specs/<NNNN-feature-slug>/`) y el return, y que cumplan lo exigido. Si falta algo, re-delegar con la corrección en el brief. **No** corregir el artefacto de fase uno mismo.
-9. Si el return trae preguntas o riesgos (`needs_human` / abiertos): reportar al humano con el formato de reportes; volcar sus respuestas al brief y re-delegar. Mantener `current.md` alineado con el bloqueo.
-10. Ante un gate (G1–G4): detenerse, mostrar el resumen con la **ruta completa** del artefacto para que el humano lo abra y revise, y pedir aprobación explícita. Solo continuar con un «aprobado» explícito del humano. Reflejar en `current.md` el gate pendiente o el resultado.
-11. Tras la aprobación de G1–G3: avanzar a la siguiente fase del ciclo y repetir desde el paso 4.
-12. Tras G4 aprobado: volcar lo relevante del ciclo en `history.md`, cerrar o reiniciar `current.md`, e informar al humano. Si el humano pide publicar el ciclo, delegar en `git_flow` (push/MR) con autorización explícita en el brief.
+6. Crear o actualizar el brief en `sdd/progress/<subagente>/brief.md` con la ruta de salida bajo esa carpeta (o, para `git_flow` / `explorer`, con la operación o pregunta pedida).
+7. Actualizar `current.md` con la fase en curso, el subagente delegado y las rutas relevantes.
+8. Delegar en el subagente de fase pasando: ruta del rol, ruta del brief, y qué debe devolver (artefacto + return).
+9. Verificar que existan el artefacto de fase (en `sdd/specs/<NNNN-feature-slug>/`) y el return, y que cumplan lo exigido. Si falta algo, re-delegar con la corrección en el brief. **No** corregir el artefacto de fase uno mismo.
+10. Si el return trae preguntas o riesgos (`needs_human` / abiertos): reportar al humano con el formato de reportes; volcar sus respuestas al brief y re-delegar. Mantener `current.md` alineado con el bloqueo.
+11. Ante un gate (G1–G4): detenerse, mostrar el resumen con la **ruta completa** del artefacto para que el humano lo abra y revise, y pedir aprobación explícita. Solo continuar con un «aprobado» explícito del humano. Reflejar en `current.md` el gate pendiente o el resultado.
+12. Tras la aprobación de G1–G3: avanzar a la siguiente fase del ciclo y repetir desde el paso 5.
+13. Tras G4 aprobado: volcar lo relevante del ciclo en `history.md`, cerrar o reiniciar `current.md`, e informar al humano. Si el humano pide publicar el ciclo, delegar en `git_flow` (push/MR) con autorización explícita en el brief.
 
 ## Responsabilidades
 
@@ -162,6 +168,7 @@ El subagente escribe:
 - **Gestionar el retroceso:**
   - Si un gate no se aprueba, volver a delegar la fase en su subagente con el feedback del humano en el brief.
   - Si en una fase posterior hay que cambiar algo ya aprobado, volver a esa fase y repetir su gate (P4).
+  - Si el humano pide un ajuste mid-ciclo (incluida la espera de un gate), decidir la fase a reabrir, informar al humano y delegar en el subagente correspondiente; no aplicar el cambio fuera del ciclo.
 - **Fijar la carpeta SDD:** al iniciar Spec, definir `sdd/specs/<NNNN-feature-slug>/` y usarla en briefs y `current.md` durante todo el ciclo.
 - **Verificar antes de presentar:** antes de pedir un gate, comprobar que el subagente produjo lo que debía:
   - el artefacto existe en `sdd/specs/<NNNN-feature-slug>/` (ruta del brief);
