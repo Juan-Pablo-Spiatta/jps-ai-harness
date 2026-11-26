@@ -95,6 +95,10 @@ Ejemplos válidos: `0001-user-login`, `0002-export-invoices`, `0003-reset-passwo
 Inválidos: `1-UserLogin`, `0001_user_login`, `0001-User Login`.
 
 - El leader elige el nombre al arrancar la fase Spec (o lo confirma con el humano si hay ambigüedad) y lo deja en `current.md` y en el brief.
+- **Feature ya trabajada:** si el pedido apunta a una capacidad o feature para la que ya existe una carpeta bajo `sdd/specs/` (mismo tema, misma US o solapamiento claro), el leader **no fija carpeta ni avanza** hasta preguntar al humano (P5, constitution §2 Fase Spec):
+  1. **Reutilizar** la carpeta existente (y reabrir la fase que corresponda si hay artefactos aprobados, P4), o
+  2. **Crear** una carpeta nueva (`NNNN` siguiente libre) que **pisa** a la anterior.
+  Si el humano elige crear una nueva, el brief a `spec_author` exige documentar en `spec.md` la supersesión (ruta de la carpeta reemplazada). El leader deja esa decisión y la ruta supersedida en `current.md`.
 - **Quién escribe:** solo `spec_author` crea o modifica `spec.md`, `plan.md` y `tasks.md` (P3).
 - **Cuándo existen:** el subagente escribe el artefacto al terminar la fase, **esté o no aprobado**. El leader no espera al gate para que el archivo exista: el humano necesita la ruta para revisarlo.
 - **Gates:** tras un return `done` sin preguntas abiertas, el leader se detiene, da la **ruta completa** del artefacto y pide aprobación explícita (G1 / G2 / G3). Solo con «aprobado» del humano se marca aprobado en `current.md` y se avanza.
@@ -147,7 +151,7 @@ El subagente escribe:
    3. Informar al humano la decisión (fase a reabrir, gates que se repetirán) y, si hay ambigüedad de alcance, preguntar antes de delegar (P5).
    4. Continuar desde el paso 4 con esa fase y el feedback del humano en el brief. No aplicar el cambio uno mismo.
 4. Si la fase no tiene subagente asignado en la constitution, o su rol en `.agents/roles/` no existe o está vacío: detenerse e informar al humano. No inventar un subagente ni hacer la fase.
-5. Si la fase es Spec y aún no hay carpeta: definir `sdd/specs/<NNNN-feature-slug>/` y dejarla en `current.md`. En Plan / Tasks reutilizar la misma carpeta.
+5. Si la fase es Spec y aún no hay carpeta: antes de fijar el nombre, comprobar si ya existe bajo `sdd/specs/` una carpeta para la misma feature o un solapamiento claro. Si existe, preguntar al humano (reutilizar vs. nueva que pisa) y solo entonces definir `sdd/specs/<NNNN-feature-slug>/` en `current.md`. Si no hay solapamiento, definir la carpeta nueva con el siguiente `NNNN` libre. En Plan / Tasks reutilizar la misma carpeta del ciclo.
    Si el trabajo debe vivir en una rama GitFlow auxiliar y aún no está en ella (o el humano pide publicarla / abrir MR): delegar en `git_flow` con brief explícito (operación, tipo, slug, autorizaciones de commit/push/MR). No improvisar push a `main`/`dev`. Tras el return, reflejar en `current.md` la rama de trabajo si aplica.
 6. Crear o actualizar el brief en `sdd/progress/<subagente>/brief.md` con la ruta de salida bajo esa carpeta (o, para `git_flow` / `explorer`, con la operación o pregunta pedida).
 7. Actualizar `current.md` con la fase en curso, el subagente delegado y las rutas relevantes.
@@ -169,7 +173,7 @@ El subagente escribe:
   - Si un gate no se aprueba, volver a delegar la fase en su subagente con el feedback del humano en el brief.
   - Si en una fase posterior hay que cambiar algo ya aprobado, volver a esa fase y repetir su gate (P4).
   - Si el humano pide un ajuste mid-ciclo (incluida la espera de un gate), decidir la fase a reabrir, informar al humano y delegar en el subagente correspondiente; no aplicar el cambio fuera del ciclo.
-- **Fijar la carpeta SDD:** al iniciar Spec, definir `sdd/specs/<NNNN-feature-slug>/` y usarla en briefs y `current.md` durante todo el ciclo.
+- **Fijar la carpeta SDD:** al iniciar Spec, definir `sdd/specs/<NNNN-feature-slug>/` (tras resolver reutilizar vs. nueva que pisa si ya había carpeta para esa feature) y usarla en briefs y `current.md` durante todo el ciclo.
 - **Verificar antes de presentar:** antes de pedir un gate, comprobar que el subagente produjo lo que debía:
   - el artefacto existe en `sdd/specs/<NNNN-feature-slug>/` (ruta del brief);
   - tiene las secciones exigidas por la constitution y la forma de la plantilla en `sdd/templates/specs/` (spec / plan / tasks según la fase);

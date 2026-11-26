@@ -29,6 +29,7 @@
 | Carpeta SDD | `sdd/specs/<NNNN-feature-slug>/` |
 | Artefacto | spec.md \| plan.md \| tasks.md |
 | Ruta completa | `sdd/specs/<NNNN-feature-slug>/<artefacto>` |
+| Pisa / reemplaza (si aplica) | `sdd/specs/<NNNN-feature-slug>/` supersedida, o vacío |
 
 ## Return
 

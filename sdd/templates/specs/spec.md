@@ -15,6 +15,7 @@
 | Título | |
 | Proyecto / paquete | |
 | Origen (ruta US / backlog) | |
+| Pisa / reemplaza (si aplica) | `sdd/specs/<NNNN-feature-slug>/` de la carpeta supersedida, o vacío |
 | Estado | `draft` \| `needs_human` \| `ready_for_g1` \| `approved_g1` |
 | Creada | |
 | Última actualización | |

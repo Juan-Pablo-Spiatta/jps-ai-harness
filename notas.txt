@@ -1,1 +1,1 @@
-1_ Agregar que si se trabaja un feature de algo que ya se trabajo hay que preguntar si trabajar sobre la spec ya existente o crear una nueva dejando documentado que la nueva pisa a la vieja 
+

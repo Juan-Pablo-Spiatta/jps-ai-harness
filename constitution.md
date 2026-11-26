@@ -72,6 +72,7 @@ Spec → G1 → Plan → G2 → Tasks → G3 → Implement → Review → G4
 - Una US genera una spec por cada proyecto o paquete al que afecta. En un repositorio simple, una US genera una sola spec.
 - La spec define solo el qué y el por qué. No incluye decisiones técnicas: el cómo se define en el Plan.
 - Antes de redactar, el responsable de la spec hace las preguntas aclaratorias que necesite (P5). Una spec con preguntas o riesgos sin resolver no pasa a G1.
+- Si el trabajo apunta a una capacidad o feature para la que ya existe una carpeta bajo `sdd/specs/`, el agente **no elige solo**: pregunta al humano (P5) si se trabaja sobre la spec ya existente (reabriendo su fase si hace falta, P4) o si se crea una carpeta nueva. Si se crea una nueva, la nueva spec debe dejar documentado de forma explícita que **pisa** (reemplaza) a la anterior, citando la ruta de la carpeta supersedida.
 
 **Fase Plan.** Además de lo establecido en los principios, la fase Plan tiene estas reglas relacionadas con P6:
 
@@ -168,4 +169,6 @@ Decisiones propias de este repositorio, sin fuente externa: los cuatro gates hum
 
 **Enmienda 1.3.0 (2026-11-26):** se agrega en la sección 2 la mecánica «Ajustes pedidos por el humano durante el ciclo»: el agente principal deriva al `leader`, que decide qué fase reabrir (P4) y a qué subagente delegar, sin aplicar el cambio fuera del ciclo. Impacto: el rol `leader` documenta el disparador y el procedimiento; no reabre por sí sola artefactos ya aprobados (solo aplica cuando el humano pida un ajuste en un ciclo activo).
 
-**Version**: 1.3.0 | **Ratified**: TODO(RATIFICATION_DATE): confirmar la fecha de adopción | **Last Amended**: 2026-11-26
+**Enmienda 1.4.0 (2026-11-26):** en la fase Spec, si el trabajo apunta a una feature con carpeta ya existente bajo `sdd/specs/`, el agente pregunta al humano (P5) si reutilizar esa spec o crear una nueva que documente que pisa a la anterior. Impacto: el `leader` debe detectar el solapamiento antes de fijar carpeta; la plantilla de `spec.md` incluye el campo de supersesión; no reabre por sí sola artefactos ya aprobados.
+
+**Version**: 1.4.0 | **Ratified**: TODO(RATIFICATION_DATE): confirmar la fecha de adopción | **Last Amended**: 2026-11-26

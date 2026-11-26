@@ -61,6 +61,7 @@ Usa `needs_human` cuando haya dudas o riesgos sin resolver. Usa `blocked` cuando
 - Sale de una US del backlog; no inventar requisitos que no estén en la US o en respuestas del humano.
 - Antes de cerrar: hacer las preguntas aclaratorias necesarias (P5). Una spec con preguntas o riesgos sin resolver no está lista para G1 → return `needs_human`.
 - Una US puede generar una spec por cada proyecto o paquete afectado; el brief indica el alcance.
+- Si el brief indica que esta spec **pisa** a otra carpeta bajo `sdd/specs/`, completar el campo «Pisa / reemplaza» en `spec.md` con la ruta supersedida. No elegir reutilizar vs. nueva: eso lo resuelve el leader con el humano.
 
 **Plan**
 
