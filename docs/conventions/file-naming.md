@@ -10,6 +10,7 @@ Reglas de nomenclatura usadas en este repositorio. Antes de crear o renombrar ru
 | Roles de subagente | `snake_case.md` | `spec_author.md` |
 | Carpetas de progreso por subagente | `snake_case/` (igual que el rol) | `sdd/progress/spec_author/` |
 | Carpetas de feature SDD | `NNNN-feature-slug` (ver abajo) | `0001-user-login` |
+| Historias de Usuario (backlog) | `US-NNN-<slug>.md` (ver abajo) | `US-001-user-login.md` |
 | Carpetas de skills | `kebab-case/` | `.agents/skills/user-login/` |
 | Archivo principal de una skill | `SKILL.md` | `.agents/skills/user-login/SKILL.md` |
 | Agentes nativos (adaptadores) | `kebab-case` en el `name` y en el archivo según la herramienta | `spec-author` |
@@ -29,6 +30,18 @@ Artefactos fijos dentro de la carpeta: `spec.md`, `plan.md`, `tasks.md`.
 
 Válidos: `0001-user-login`, `0002-export-invoices`.  
 Inválidos: `1-UserLogin`, `0001_user_login`, `0001-User Login`.
+
+## Backlog SDD: `sdd/backlog/US-NNN-<slug>.md`
+
+Fuente de detalle operativo: [`sdd/backlog/README.md`](../../sdd/backlog/README.md). Resumen:
+
+| Parte | Regla | Ejemplo |
+| --- | --- | --- |
+| `US-NNN` | Prefijo `US-` + entero de 3 dígitos con ceros | `US-001` |
+| `<slug>` | kebab-case ASCII, 2–5 palabras | `user-login` |
+| Archivo | `US-NNN-<slug>.md` | `US-001-user-login.md` |
+
+Plantilla: [`sdd/templates/backlog/us.md`](../../sdd/templates/backlog/us.md). Cada US es un archivo único; la cola ordenada vive en el `README.md` del backlog.
 
 ## Convenciones de este directorio
 
