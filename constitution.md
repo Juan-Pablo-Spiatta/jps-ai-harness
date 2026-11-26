@@ -109,6 +109,7 @@ No forman parte de ninguna fase del ciclo y no son responsables de ningún artef
 | --- | --- | --- |
 | `leader` | Todo el ciclo | Orquestar el ciclo y a todos los subagentes: decide qué fase toca, delega en el subagente que corresponde, controla los gates y mantiene informado al humano. No produce los artefactos de las fases ni aprueba gates (P1, P3). |
 | `explorer` | A demanda | Recopilar información. Cualquier agente puede ejecutarlo cuando necesite información sobre algo. |
+| `git_flow` | A demanda | Ejecutar el proceso GitFlow del repositorio (ramas auxiliares, publicación y merge requests) según [`docs/conventions/gitflow.md`](./docs/conventions/gitflow.md). No produce artefactos de fase ni aprueba gates. |
 
 ### Rol de cada subagente
 
@@ -153,8 +154,10 @@ Fuentes consultadas el 2026-11-23. Inspiran esta constitution, pero no la sustit
 | [GitHub Spec Kit: plan-template.md](https://raw.githubusercontent.com/github/spec-kit/main/templates/plan-template.md) y [commands/analyze.md](https://raw.githubusercontent.com/github/spec-kit/main/templates/commands/analyze.md) | Contraste del plan contra la constitution antes de avanzar; una violación es bloqueante y no se reinterpreta. | Sección 4 |
 | [Claude Code: best practices](https://code.claude.com/docs/en/best-practices) | Mantener los archivos de contexto cortos y solo con lo que el agente no puede deducir. | Estilo general |
 
-Decisiones propias de este repositorio, sin fuente externa: los cuatro gates humanos G1-G4, el ciclo con sus fases, los subagentes (con sus fases o su rol transversal), el reparto de precedencia con `AGENTS.MD`, y P6 (TDD estricto con stack documentado bajo `docs/decisions/`, sin fijar nombre de archivo ni runner en el harness).
+Decisiones propias de este repositorio, sin fuente externa: los cuatro gates humanos G1-G4, el ciclo con sus fases, los subagentes (con sus fases o su rol transversal, incluido `git_flow`), el reparto de precedencia con `AGENTS.MD`, y P6 (TDD estricto con stack documentado bajo `docs/decisions/`, sin fijar nombre de archivo ni runner en el harness).
 
 **Enmienda 1.1.0 (2026-11-23):** se agrega P6 (TDD + obligación de stack/uso en un archivo bajo `docs/decisions/`; si falta, el agente lo exige al humano), reglas de Plan/Tasks/Implement ligadas a P6, y el bloque RESERVADO de producto pasa a numerar desde P7. Impacto: planes y tasks futuros deben citar la decisión de pruebas existente y desglosar comportamiento ejecutable en orden red→green→refactor; artefactos ya aprobados bajo 1.0.0 deben reabrirse si dejan de cumplir P6 (sección 6, P4).
 
-**Version**: 1.1.0 | **Ratified**: TODO(RATIFICATION_DATE): confirmar la fecha de adopción | **Last Amended**: 2026-11-23
+**Enmienda 1.2.0 (2026-11-26):** se agrega el subagente transversal `git_flow` (sección 3) para ejecutar el proceso GitFlow (ramas, publicación, MRs) sin alterar el ciclo SDD ni los gates. Impacto: el `leader` (u otro agente) puede delegarle operaciones Git vía brief; hace falta su rol en `.agents/roles/git_flow.md`, plantillas de progreso y adaptador nativo. No reabre artefactos de fase ya aprobados.
+
+**Version**: 1.2.0 | **Ratified**: TODO(RATIFICATION_DATE): confirmar la fecha de adopción | **Last Amended**: 2026-11-26

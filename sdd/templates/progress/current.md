@@ -18,7 +18,7 @@
 | --- | --- |
 | Fase actual | Spec \| Plan \| Tasks \| Implement \| Review |
 | Gate pendiente | ninguno \| G1 \| G2 \| G3 \| G4 |
-| Subagente activo | ninguno \| spec_author \| implementer \| reviewer \| explorer |
+| Subagente activo | ninguno \| spec_author \| implementer \| reviewer \| explorer \| git_flow |
 | Estado | `running` \| `waiting_gate` \| `blocked` \| `needs_human` |
 
 ## Artefactos relevantes

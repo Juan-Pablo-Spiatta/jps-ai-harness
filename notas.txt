@@ -1,0 +1,11 @@
+1_ Agregar que si se trabaja un feature de algo que ya se trabajo hay que preguntar si trabajar sobre la spec ya existente o crear una nueva dejando documentado que la nueva pisa a la vieja 
+
+2_ Quiero que agreguemos la regla al SDD que diga que si el humano pide hacer algun ajuste mientas estemos en algun paso del ciclo lo deribes al sub agente correspondiente para hacer el paso a paso correctamente.
+
+Por ejemplo si termino el ciclo y estoy esperando el aproado del G4 y el humano pide realizar algun cambio por que no ve que este implemetao correctamente, entonces deribas al leader para que defina como seguir, puede que necesiteos ajusar la spec y volver a pasar por el ciclo completo 
+
+3_ Ver como incorporar E2E a los tests
+
+4_ Ver de agregar skills al agents 
+
+5_ Agregar gitflow y preparar subagents para eso

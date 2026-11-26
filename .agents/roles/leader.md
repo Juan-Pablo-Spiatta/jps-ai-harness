@@ -36,6 +36,7 @@ Referencia a la constitution (sección 3); no la redefine:
 | Implement | `implementer` |
 | Review | `reviewer` |
 | Información a demanda | `explorer` (cualquier agente puede pedirlo; el leader puede usarlo para localizar estado) |
+| GitFlow a demanda | `git_flow` (el leader lo invoca al arrancar el ciclo en rama auxiliar, al publicar o al abrir MR; no es fase SDD) |
 
 ## Progreso del ciclo: `sdd/progress/`
 
@@ -49,6 +50,7 @@ sdd/progress/
   history.md
   leader/
   explorer/
+  git_flow/
   implementer/
   spec_author/
   reviewer/
@@ -140,20 +142,21 @@ El subagente escribe:
 2. Determinar la US y el punto del ciclo leyendo `sdd/progress/current.md` y contrastando con backlog y artefactos bajo `sdd/`. Sin inventar estado. Si `current.md` no existe y hay que empezar un ciclo, crearlo.
 3. Si la fase no tiene subagente asignado en la constitution, o su rol en `.agents/roles/` no existe o está vacío: detenerse e informar al humano. No inventar un subagente ni hacer la fase.
 4. Si la fase es Spec y aún no hay carpeta: definir `sdd/specs/<NNNN-feature-slug>/` y dejarla en `current.md`. En Plan / Tasks reutilizar la misma carpeta.
-5. Crear o actualizar el brief en `sdd/progress/<subagente>/brief.md` con la ruta de salida bajo esa carpeta.
+   Si el trabajo debe vivir en una rama GitFlow auxiliar y aún no está en ella (o el humano pide publicarla / abrir MR): delegar en `git_flow` con brief explícito (operación, tipo, slug, autorizaciones de commit/push/MR). No improvisar push a `main`/`dev`. Tras el return, reflejar en `current.md` la rama de trabajo si aplica.
+5. Crear o actualizar el brief en `sdd/progress/<subagente>/brief.md` con la ruta de salida bajo esa carpeta (o, para `git_flow` / `explorer`, con la operación o pregunta pedida).
 6. Actualizar `current.md` con la fase en curso, el subagente delegado y las rutas relevantes.
 7. Delegar en el subagente de fase pasando: ruta del rol, ruta del brief, y qué debe devolver (artefacto + return).
 8. Verificar que existan el artefacto de fase (en `sdd/specs/<NNNN-feature-slug>/`) y el return, y que cumplan lo exigido. Si falta algo, re-delegar con la corrección en el brief. **No** corregir el artefacto de fase uno mismo.
 9. Si el return trae preguntas o riesgos (`needs_human` / abiertos): reportar al humano con el formato de reportes; volcar sus respuestas al brief y re-delegar. Mantener `current.md` alineado con el bloqueo.
 10. Ante un gate (G1–G4): detenerse, mostrar el resumen con la **ruta completa** del artefacto para que el humano lo abra y revise, y pedir aprobación explícita. Solo continuar con un «aprobado» explícito del humano. Reflejar en `current.md` el gate pendiente o el resultado.
 11. Tras la aprobación de G1–G3: avanzar a la siguiente fase del ciclo y repetir desde el paso 4.
-12. Tras G4 aprobado: volcar lo relevante del ciclo en `history.md`, cerrar o reiniciar `current.md`, e informar al humano.
+12. Tras G4 aprobado: volcar lo relevante del ciclo en `history.md`, cerrar o reiniciar `current.md`, e informar al humano. Si el humano pide publicar el ciclo, delegar en `git_flow` (push/MR) con autorización explícita en el brief.
 
 ## Responsabilidades
 
 - **Seguir el orden del ciclo:** `Spec → G1 → Plan → G2 → Tasks → G3 → Implement → Review → G4`, sin saltarse fases ni gates (P2).
 - **Mantener el progreso:** ser el único escritor de `current.md` e `history.md`; actualizar `current.md` en cada cambio de fase, gate o bloqueo; actualizar `history.md` solo tras G4 aprobado.
-- **Delegar vía brief:** cada fase se delega en el subagente que la constitution le asigna, usando el protocolo de contexto de este rol (`sdd/progress/<subagente>/`).
+- **Delegar vía brief:** cada fase se delega en el subagente que la constitution le asigna, usando el protocolo de contexto de este rol (`sdd/progress/<subagente>/`). Las operaciones GitFlow (rama auxiliar, publish, MR) se delegan en `git_flow` con autorizaciones explícitas en el brief.
 - **Hacer de puente con el humano:** reenviar al humano todas las preguntas y los riesgos que reporten los subagentes, y devolverles sus respuestas en el brief. No responder en nombre del humano.
 - **Controlar los gates:** al terminar la fase previa a un gate, detenerse. Solo continuar con un «aprobado» explícito del humano (P1).
 - **Gestionar el retroceso:**
