@@ -10,6 +10,8 @@ Reglas de nomenclatura usadas en este repositorio. Antes de crear o renombrar ru
 | Roles de subagente | `snake_case.md` | `spec_author.md` |
 | Carpetas de progreso por subagente | `snake_case/` (igual que el rol) | `sdd/progress/spec_author/` |
 | Carpetas de feature SDD | `NNNN-feature-slug` (ver abajo) | `0001-user-login` |
+| Carpetas de skills | `kebab-case/` | `.agents/skills/user-login/` |
+| Archivo principal de una skill | `SKILL.md` | `.agents/skills/user-login/SKILL.md` |
 | Agentes nativos (adaptadores) | `kebab-case` en el `name` y en el archivo según la herramienta | `spec-author` |
 
 No mezclar estilos en el mismo ámbito (p. ej. no `Spec_Author.md` junto a `spec_author.md`).
@@ -30,7 +32,7 @@ Inválidos: `1-UserLogin`, `0001_user_login`, `0001-User Login`.
 
 ## Convenciones de este directorio
 
-Los archivos bajo `docs/conventions/` usan **kebab-case** (`commits.md`, `file-naming.md`).
+Los archivos bajo `docs/conventions/` usan **kebab-case** (`gitflow.md`, `file-naming.md`).
 
 ## Fuera de alcance
 

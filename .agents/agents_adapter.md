@@ -31,6 +31,7 @@ Aplica cuando el humano pide crear, regenerar o publicar los subagentes nativos 
 
 - **Fuente única de verdad del comportamiento:** `.agents/roles/<subagente>.md`. Ciclo, gates y tabla de subagentes: `constitution.md`. Reglas de conducta del agente: `AGENTS.md`.
 - **Adaptadores finos:** el archivo de cada herramienta solo aporta lo que esa herramienta necesita para descubrir el agente (`name`, `description`, herramientas, modelo) y le ordena leer y seguir el rol. **No** copiar procedimiento, brief/return, rutas SDD ni reglas de fase en el adaptador.
+- **Skills compartidas:** el contenido portable de las skills vive en `.agents/skills/<skill-slug>/SKILL.md`, según [`docs/conventions/skills.md`](../docs/conventions/skills.md). Los adaptadores nativos pueden referenciar o registrar una skill si la herramienta lo exige, pero no deben copiar sus instrucciones.
 - Ninguna de las cuatro documentaciones describe un mecanismo para importar otro archivo dentro de la definición del agente; por eso la instrucción de leer el rol va en el cuerpo y el agente necesita herramientas de lectura.
 - **Nombres:** el archivo de rol y las rutas bajo `sdd/progress/` usan `snake_case` (`spec_author`). El `name` del agente nativo usa **kebab-case** (`spec-author`) y debe ser el mismo en las cuatro herramientas. La ruta del rol en el cuerpo del adaptador sigue siendo `.agents/roles/spec_author.md`.
 
@@ -45,6 +46,7 @@ Tomados de `constitution.md` (sección 3) y de `.agents/roles/`. Usar estos valo
 | `implementer.md` | `implementer` | Ejecuta las tasks aprobadas. Úsalo en la fase Implement. | Lectura, búsqueda, edición y ejecución (código + verificación). |
 | `reviewer.md` | `reviewer` | Revisa la implementación contra spec, plan, tasks y constitution; emite el informe. Úsalo en la fase Review. | Lectura, búsqueda y edición (solo el informe / `return.md`). |
 | `explorer.md` | `explorer` | Recopila información verificable a demanda. Úsalo cuando haga falta investigar el repo sin modificar artefactos de fase. | Solo lectura y búsqueda. En Cursor: `readonly: true`. |
+| `git_flow.md` | `git-flow` | Ejecuta GitFlow (ramas auxiliares, push y MRs según convención). Úsalo al arrancar el ciclo en rama de trabajo, al publicar o al abrir un MR. | Lectura, búsqueda y ejecución (git y CLI del host). |
 
 El cuerpo del adaptador es siempre el mismo patrón (cambiar solo la ruta del rol):
 
@@ -199,6 +201,22 @@ Si este archivo y el rol se contradicen, manda el rol.
 
 - Los ejemplos oficiales usan `snake_case` en `name` (p. ej. `pr_explorer`). La documentación no indica que kebab-case esté prohibido, pero tampoco lo muestra: **no verificado**. Si falla, usa el `snake_case` del archivo de rol (`spec_author`) de forma consistente en las cuatro herramientas.
 - Los subagentes heredan el sandbox y los permisos de la sesión padre.
+
+---
+
+## Skills
+
+La forma portable de agregar una skill al harness está documentada en
+[`docs/conventions/skills.md`](../docs/conventions/skills.md):
+
+```text
+.agents/skills/<skill-slug>/SKILL.md
+```
+
+El harness no define skills concretas. Antes de publicar una skill para una
+herramienta específica, hay que verificar cómo esa herramienta descubre y
+activa skills. Si necesita un archivo adicional, ese archivo debe ser un
+adaptador mínimo hacia `SKILL.md`, no una segunda fuente de instrucciones.
 
 ---
 

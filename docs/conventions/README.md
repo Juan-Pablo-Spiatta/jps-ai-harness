@@ -1,6 +1,6 @@
 # Convenciones
 
-Acuerdos de **forma** del repositorio (harness): cómo se nombran cosas, cómo se escriben commits, y reglas similares que no son metodología SDD, principios de la constitution ni decisiones de producto.
+Acuerdos de **forma** del repositorio (harness): cómo se nombran cosas, cómo se trabaja con ramas (GitFlow), y reglas similares que no son metodología SDD, principios de la constitution ni decisiones de producto.
 
 ## Cómo usar este directorio
 
@@ -10,7 +10,7 @@ Acuerdos de **forma** del repositorio (harness): cómo se nombran cosas, cómo s
 | Agentes | Las consultan antes de crear, renombrar o formatear artefactos sujetos a ellas. |
 
 - Un tema = un archivo Markdown en esta carpeta.
-- Nombre del archivo: **kebab-case** + `.md` (ej. `file-naming.md`, `commits.md`).
+- Nombre del archivo: **kebab-case** + `.md` (ej. `file-naming.md`, `gitflow.md`).
 - Si una convención aún no existe o está vacía, el agente lo indica y pregunta al humano (P5); no inventa una.
 
 ## Índice
@@ -18,7 +18,8 @@ Acuerdos de **forma** del repositorio (harness): cómo se nombran cosas, cómo s
 | Archivo | Tema |
 | --- | --- |
 | [file-naming.md](./file-naming.md) | Nombres de archivos y carpetas |
-| [commits.md](./commits.md) | Formato de mensajes de commit |
+| [gitflow.md](./gitflow.md) | Flujo de ramas GitFlow |
+| [skills.md](./skills.md) | Ubicación y formato portable de las skills |
 
 ## Precedencia
 
